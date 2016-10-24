@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -71,6 +72,8 @@ public class WorldLoad extends JavaPlugin {
                         + "- Displays this page");
                 sender.sendMessage(ChatColor.DARK_AQUA + "/worldload " + ChatColor.GRAY + "tp <world> "
                         + ChatColor.WHITE + "- Teleport to a world");
+                sender.sendMessage(ChatColor.DARK_AQUA + "/worldload " + ChatColor.GRAY + "tp2 <player> <world> "
+                        + ChatColor.WHITE + "- Teleport to a world");
                 sender.sendMessage(ChatColor.DARK_AQUA + "/worldload " + ChatColor.GRAY + "create <world> [-flat] "
                         + ChatColor.WHITE + "- Create a world");
                 sender.sendMessage(ChatColor.DARK_AQUA + "/worldload " + ChatColor.GRAY + "remove <world> "
@@ -121,9 +124,19 @@ public class WorldLoad extends JavaPlugin {
             player.sendMessage(ChatColor.GREEN + "Teleported to world \"" + args[1] + "\"");
             return true;
         }
-
+        
+        // WorldLoad TP2
+        
+        if(args[0].equalsIgnoreCase("tp2"))
+        {
+        	Player player = Bukkit.getPlayer(args[1]);
+        	player.teleport(getServer().getWorld(args[2]).getSpawnLocation());
+        	
+        	return true;
+        }
+        
         // WorldLoad Create
-
+        
         if (args[0].equalsIgnoreCase("create")) {
             if (!sender.hasPermission("worldload.create")) {
                 sender.sendMessage(ChatColor.RED + "No permission!");
