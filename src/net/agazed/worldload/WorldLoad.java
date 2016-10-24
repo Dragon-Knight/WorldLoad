@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Difficulty;
-import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
@@ -118,9 +116,7 @@ public class WorldLoad extends JavaPlugin {
                 player.sendMessage(ChatColor.RED + "World does not exist!");
                 return true;
             }
-            Location loc = new Location(getServer().getWorld(args[1]), 0,
-                    getServer().getWorld(args[1]).getHighestBlockYAt(0, 0), 0);
-            player.teleport(loc);
+            player.teleport(getServer().getWorld(args[1]).getSpawnLocation());
             player.sendMessage(ChatColor.GREEN + "Teleported to world \"" + args[1] + "\"");
             return true;
         }
